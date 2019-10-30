@@ -35,8 +35,10 @@
 	# Fetch origin branches
 	fo = fetch origin --prune --no-tags
 
+	po = "!p() { git push origin \"$1\"; }; p"
+
 	# Force with lease push
-	pfo = "!f() { git push --force-with-lease origin \"$1\"; }; f" 
+	pfo = "!f() { git push --force-with-lease origin \"$1\"; }; f"
 
 	# Quickly amend the currently staged files to the latest commit without
 	# rewording commit message
