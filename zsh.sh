@@ -14,7 +14,7 @@ chsh -s `which zsh`
 
 # Install Oh-my-zsh
 echo "Installing Oh-my-zsh..."
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
 
 # Install Zsh Plugins
 echo "Installing Oh-my-zsh plugins..."
@@ -24,3 +24,11 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 
 # Copy Avit-arrow theme
 cp $PWD/zsh/avit-arrow.zsh-theme ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes
+
+# Copy Alias file
+cp $PWD/zsh/aliases.zsh ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/
+
+# Copy .zshrc
+cp $PWD/zsh/.zshrc ~/
+
+source ~/.zshrc
