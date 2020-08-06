@@ -63,50 +63,49 @@ brew install yarn
 brew install bat
 brew install youtube-dl
 
-# GUI Apps (macOS only)
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  echo "Attempting to install GUI apps"
-  ## Productivity
-  brew cask install the-unarchiver
-  brew cask install iterm2
-  brew cask install gimp
-  brew cask install libreoffice
-  brew cask install numi
-  brew cask install pencil
-  brew cask install macpass
-  brew cask install teamviewer
+# GUI Apps
+echo "Attempting to install GUI apps"
 
-  ## Web Browsers
-  brew cask install google-chrome
-  brew cask install chromedriver
-  brew cask install firefox
-  brew cask install opera
+## Productivity
+brew cask install the-unarchiver
+brew cask install iterm2
+brew cask install gimp
+brew cask install libreoffice
+brew cask install numi
+brew cask install pencil
+brew cask install macpass
+brew cask install teamviewer
 
-  ## Cloud Storage Providers
-  brew cask install google-backup-and-sync
-  brew cask install dropbox
+## Web Browsers
+brew cask install google-chrome
+brew cask install chromedriver
+brew cask install firefox
+brew cask install opera
 
-  ## Text Editors
-  brew cask install visual-studio-code
-  brew cask install atom
-  brew cask install sublime-text
+## Cloud Storage Providers
+brew cask install insync
+brew cask install dropbox
 
-  ## Multimedia
-  brew cask install vlc
-  brew cask install spotify
+## Text Editors
+brew cask install visual-studio-code
+brew cask install atom
+brew cask install sublime-text
 
-  ## Work Tools
-  brew cask install zoomus
-  brew cask install slack
+## Multimedia
+brew cask install vlc
+brew cask install spotify
 
-  # Fonts
-  brew tap homebrew/cask-fonts
-  brew cask install font-fira-code
-  brew cask install font-cascadia
-  brew cask install font-source-code-pro
-  brew cask install font-source-sans-pro
-  brew cask install font-source-serif-pro
-fi
+## Work Tools
+brew cask install zoomus
+brew cask install slack
+
+# Fonts
+brew tap homebrew/cask-fonts
+brew cask install font-fira-code
+brew cask install font-cascadia
+brew cask install font-source-code-pro
+brew cask install font-source-sans-pro
+brew cask install font-source-serif-pro
 
 # GitLab Development Kit tools
 brew install redis

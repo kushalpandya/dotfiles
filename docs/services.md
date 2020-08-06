@@ -1,11 +1,6 @@
-# Hivemind Setup Instructions
-
-This is a short guide to configure various services on Hivemind Server running
-Ubuntu 18.04 or higher.
-
 ## Services Configuration
 
-Following are the instructions to configure various services.
+Following are the instructions to configure various services on Ubuntu 20.04+.
 
 - [Samba](#samba)
 - [OpenSSH](#openssh)
@@ -396,13 +391,17 @@ default port and add trusted domains from which NextCloud is accessible on the n
 To define default port, run;
 
 ```bash
-snap set nextcloud ports.http=10000 ports.https=10001
+sudo snap set nextcloud ports.http=10000 ports.https=10001
 ```
 
-Notice that we have set port `10000` as default for HTTP while `10001` for HTTPS, You can change it to any other port as well.
+Notice that we have set port `10000` as default for HTTP while `10001` for HTTPS, You can change it to any
+other port as well.
 
-At this point, NextCloud Web UI can be accessed in the browser using `http://localhost:10000`, but we want it to be accessible
-from other network devices as well. So now we need to add our server's IP to NextCloud trusted domain by running;
+At this point, NextCloud Web UI can be accessed in the browser using `http://localhost:10000`, be sure
+to visit that URL first and go through the setup (like setting up default user and password).
+
+Now,we want our NextCloud instance to be accessible from other devices on our network as well. So now we
+need to add our server's IP to NextCloud trusted domain by running;
 
 ```bash
 sudo snap run nextcloud.occ config:system:set trusted_domains 1 --value=192.168.0.100
@@ -426,17 +425,18 @@ By default, NextCloud maintains files and folders in its own directory but in ca
 in your server containing media files and any other data and if you wish to access those using NextCloud, you can
 enable it by using _External Storage_ feature of NextCloud.
 
-Start by first connecting NextCloud to external storage by running;
+Start by first enabling _External Storage support_ app, this can be located in`/index.php/settings/apps/featured/files_external` page.
+Once that is done, connect NextCloud to external storage by running;
 
 ```bash
 sudo snap connect nextcloud:removable-media
 ```
 
 Now assuming that you have mounted your external partitions in directories within `/media` (eg; `/media/Store` in my case),
-you need to first create a dedicated `NextCloud` directory within `/media/Store`. So let's create one;
+you need to first create a dedicated `Nextcloud` directory within `/media/Store`. So let's create one;
 
 ```bash
-mkdir /media/Store/NextCloud
+mkdir /media/Store/Nextcloud
 ```
 
 Once done, we need to move NextCloud default data directory over to our newly created directory;
@@ -453,11 +453,12 @@ sudo nano /var/snap/nextcloud/current/nextcloud/config/config.php
 
 Here, change following config as;
 
-```
-'datadirectory' => '/media/Store/NextCloud/data/',
+```php
+'datadirectory' => '/media/Store/Nextcloud/data/',
 ```
 
-Save and exit the file, now we need to disable NextCloud for a bit to update data directory permissions;
+Save and exit the file, now, depending on how your data directory partition is mounted,
+we need to disable NextCloud for a bit to update data directory permissions;
 
 ```bash
 sudo snap disable nextcloud
@@ -466,11 +467,19 @@ sudo snap disable nextcloud
 Once done, we need to change data directory ownership as;
 
 ```bash
-sudo chmod 0770 /media/Store/NextCloud/data
+sudo chmod 0770 /media/Store/Nextcloud/data
 ```
 
 ```bash
-sudo chown www-data:www-data /media/Store/NextCloud/data
+sudo chown www-data:www-data /media/Store/Nextcloud/data
+```
+
+In case you mounted NTFS partition will full R/W permissions, above `chmod`/`chown` commands
+won't work, so we need to make Nextcloud ignore the data directory permissions by adding
+following line below `datadirectory` config within `/var/snap/nextcloud/current/nextcloud/config/config.php`;
+
+```php
+'check_data_directory_permissions' => false,
 ```
 
 Now finally enable NextCloud again

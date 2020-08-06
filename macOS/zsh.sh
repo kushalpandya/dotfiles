@@ -4,7 +4,7 @@
 if [[ $(zsh --version) ]]; then
   echo "Zsh already installed"
 else
-echo "Attempting to install Zsh..."
+  echo "Attempting to install Zsh..."
   brew install zsh
 fi
 
@@ -23,12 +23,12 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 # Copy Avit-arrow theme
-cp $PWD/zsh/avit-arrow.zsh-theme ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes
+cp $PWD/common/avit-arrow.zsh-theme ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes
 
 # Copy Alias file
-cp $PWD/zsh/aliases.zsh ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/
+cp $PWD/zsh/macOS/aliases.zsh ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/
 
 # Copy .zshrc
-cp $PWD/zsh/.zshrc ~/
+cp $PWD/zsh/macOS/zshrc ~/.zshrc
 
 source ~/.zshrc

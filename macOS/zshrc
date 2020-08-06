@@ -12,6 +12,13 @@ plugins=(git zsh-completions zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
+# Setup SSH Agent
+eval "$(ssh-agent -s)" > /dev/null
+
+# Add SSH Keys
+# Update and uncomment following line for each key.
+# ssh-add ~/.ssh/github &>/dev/null
+
 # Setup Ruby
-eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
