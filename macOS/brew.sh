@@ -5,25 +5,16 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   if [[ $(xcode-select --version) ]]; then
     echo "Xcode command tools already installed"
   else
-    echo "Installing Xcode commandline tools"
     $(xcode-select --install)
   fi
 fi
 
 # Check Homebrew presence, install if doesn't exist
 if [[ $(brew --version) ]] ; then
-  echo "Attempting to update Homebrew"
-  brew update
-  brew upgrade
-  brew cask upgrade
+  brew update && brew upgrade && brew cask upgrade
 else
-  echo "Attempting to install Homebrew"
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
-
-# Begin Homebrew package installation
-echo "Effective Homebrew version:"
-brew --version
 
 # Save Homebrew’s installed location.
 BREW_PREFIX=$(brew --prefix)
@@ -63,42 +54,6 @@ brew install yarn
 brew install bat
 brew install youtube-dl
 
-# GUI Apps
-echo "Attempting to install GUI apps"
-
-## Productivity
-brew cask install the-unarchiver
-brew cask install iterm2
-brew cask install gimp
-brew cask install libreoffice
-brew cask install numi
-brew cask install pencil
-brew cask install macpass
-brew cask install teamviewer
-
-## Web Browsers
-brew cask install google-chrome
-brew cask install chromedriver
-brew cask install firefox
-brew cask install opera
-
-## Cloud Storage Providers
-brew cask install insync
-brew cask install dropbox
-
-## Text Editors
-brew cask install visual-studio-code
-brew cask install atom
-brew cask install sublime-text
-
-## Multimedia
-brew cask install vlc
-brew cask install spotify
-
-## Work Tools
-brew cask install zoomus
-brew cask install slack
-
 # Fonts
 brew tap homebrew/cask-fonts
 brew cask install font-fira-code
@@ -109,7 +64,7 @@ brew cask install font-source-serif-pro
 
 # GitLab Development Kit tools
 brew install redis
-brew install postgresql@10
+brew install postgresql@11
 brew install libiconv
 brew install pkg-config
 brew install cmake
