@@ -24,8 +24,7 @@ echo_e "Starting Installation"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   echo "Setting up script permissions"
-  chmod +x $PWD/macOS/brew.sh
-  chmod +x $PWD/macOS/zsh.sh
+  chmod +x $PWD/macOS/*.sh
 
   echo_e "Running Homebrew for non-GUI packages"
   ./macOS/brew.sh
@@ -43,10 +42,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   ./macOS/zsh.sh
 else
   echo_e "Setting up script permissions"
-  chmod +x $PWD/Ubuntu/apt-cli.sh
-  chmod +x $PWD/Ubuntu/apt-gui.sh
-  chmod +x $PWD/Ubuntu/brew.sh
-  chmod +x $PWD/Ubuntu/zsh.sh
+  chmod +x $PWD/Ubuntu/*.sh
 
   echo_e "Making sure there are no pending upgrades"
   sudo apt update && sudo apt upgrade -y && sudo apt autoremove && sudo apt autoclean
