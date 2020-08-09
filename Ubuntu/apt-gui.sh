@@ -32,9 +32,9 @@ fi
 # Install Apps
 
 sudo apt install \
-  vlc
-  flameshot
-  gimp
+  vlc \
+  flameshot \
+  gimp \
   keepassxc \
   google-chrome-stable \
   latte-dock \
