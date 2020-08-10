@@ -92,7 +92,7 @@ Save and exit the file and then once you logout and log back in, you
 should start seeing password characters as `*` while typing
 passwords in bash.
 
-## Set GRUB Timeout Duration
+### Set GRUB Timeout Duration
 
 If you're running Ubuntu along-side Windows in a dual-boot setup,
 chances are that GRUB already has duration of 10 seconds set to
