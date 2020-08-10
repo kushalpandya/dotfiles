@@ -34,6 +34,8 @@ fi
 sudo apt install \
   vlc \
   flameshot \
+  grub-customizer \
+  grsync \
   gimp \
   keepassxc \
   google-chrome-stable \
