@@ -12,15 +12,6 @@ plugins=(git zsh-completions zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
-# Setup SSH agent
-eval "$(ssh-agent -s)" > /dev/null
-
-# Setup rbenv
-eval "$(rbenv init -)"
-
-# Setup Homebrew for Linux
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
 # Setup Locale, change it to your default locale
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -29,6 +20,15 @@ export LC_ALL=en_US.UTF-8
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 # Add any custom paths to `PATH` below
+
+# Setup SSH agent
+eval "$(ssh-agent -s)" > /dev/null
+
+# Setup rbenv
+eval "$(rbenv init -)"
+
+# Setup Homebrew for Linux
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Add SSH Keys
 # Update and uncomment following line for each keypair.
