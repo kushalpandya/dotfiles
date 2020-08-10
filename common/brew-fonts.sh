@@ -5,6 +5,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   # macOS; use `brew cask`
   alias install_font="brew cask install"
 else
+  # Setup brew for current env
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
   # Linux; use `brew`
   alias install_font="brew install"
 fi
