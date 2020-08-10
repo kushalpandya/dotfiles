@@ -22,12 +22,14 @@ echo_q() {
 # Installation begins here.
 echo_e "Starting Installation"
 
+chmod +x $PWD/common/*.sh
 if [[ "$OSTYPE" == "darwin"* ]]; then
   echo "Setting up script permissions"
   chmod +x $PWD/macOS/*.sh
 
   echo_e "Running Homebrew for non-GUI packages"
   ./macOS/brew.sh
+  ./common/brew.sh
 
   # Prompt for GUI package installations
   echo_q "Do you want to run Homebrew Cask for GUI apps? [y/n]"
@@ -38,7 +40,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     echo_e "Skipped GUI packages installation"
   fi
 
-  echo "Setting up Zsh"
+  echo_e "Setting up Zsh with Oh-my-zsh"
+  ./common/zsh.sh
   ./macOS/zsh.sh
 else
   echo_e "Setting up script permissions"
@@ -63,9 +66,20 @@ else
 
   echo_e "Running Homebrew for non-GUI packages"
   ./Ubuntu/brew.sh
+  ./common/brew.sh
 
-  echo_e "Setting up Zsh"
+  echo_e "Setting up Zsh with Oh-my-zsh"
+  ./common/zsh.sh
   ./Ubuntu/zsh.sh
+fi
+
+# Prompt for Fonts installation
+echo_q "Do you want to install some extra monospaced fonts? [y/n]"
+read answer
+if [ "$answer" != "${answer#[Yy]}" ]; then
+  sudo -E ./common/brew-fonts.sh
+else
+  echo_e "Skipped fonts installation"
 fi
 
 # Load Git Config
