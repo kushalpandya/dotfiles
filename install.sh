@@ -52,6 +52,7 @@ else
 
   echo_e "Running apt for non-GUI packages"
   ./Ubuntu/apt-cli.sh
+  ./Ubuntu/rbenv.sh
 
   # Prompt for GUI package installations
   echo_q "Do you want to run apt for GUI packages? [y/n]"
