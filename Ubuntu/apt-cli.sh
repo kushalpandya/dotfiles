@@ -4,6 +4,7 @@
 sudo apt install \
   curl \
   wget \
+  file \
   autoconf \
   bison \
   apt-transport-https \
@@ -44,6 +45,8 @@ sudo apt install \
   net-tools \
   openssh-server \
   nginx \
+  htop \
+  zsh \
   git \
   deluged deluge deluge-web \
   nodejs \
