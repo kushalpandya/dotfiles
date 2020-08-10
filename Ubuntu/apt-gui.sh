@@ -3,10 +3,14 @@
 # Launchpad PPAs
 sudo add-apt-repository ppa:graphics-drivers/ppa -y       # GPU Drivers (NVidia/AMD)
 sudo add-apt-repository ppa:libreoffice/ppa -y            # LibreOffice Stable Releases
-sudo add-apt-repository ppa:kubuntu-ppa/backports -y      # Kubuntu Backports for KDE
 sudo add-apt-repository ppa:phoerious/keepassxc -y        # KeePass Desktop Client
 # sudo add-apt-repository ppa:otto-kesselgulasch/gimp -y  # GIMP (disabled for now)
 sudo add-apt-repository ppa:rikmills/latte-dock -y        # Latte Dock
+
+# Add Kubuntu Backports PPA in case of distro being Kubuntu
+if [[ "$XDG_CURRENT_DESKTOP" == "KDE" ]] && [[ $(lsb_release -is) == 'Ubuntu' ]]; then
+  sudo add-apt-repository ppa:kubuntu-ppa/backports -y    # Kubuntu Backports for KDE
+fi
 
 # Google Chrome
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
