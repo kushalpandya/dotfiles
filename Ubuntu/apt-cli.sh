@@ -54,9 +54,3 @@ sudo apt install \
   docker-ce docker-ce-cli containerd.io \
   plexmediaserver \
   -y
-
-# Install rbenv
-sudo apt install \
-  libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev \
-  -y
-curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash
