@@ -5,10 +5,10 @@ if [[ $(zsh --version) != '' ]]; then
   chsh -s `which zsh`
 
   # Copy Alias file
-  cp $PWD/zsh/Ubuntu/aliases.zsh ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/
+  cp $PWD/Ubuntu/aliases.zsh ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/
 
   # Copy .zshrc
-  cp $PWD/zsh/Ubuntu/zshrc ~/.zshrc
+  cp $PWD/Ubuntu/zshrc ~/.zshrc
 
   source ~/.zshrc
 fi
