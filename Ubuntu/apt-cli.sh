@@ -14,8 +14,9 @@ sudo apt install \
   -y
 
 # Launchpad PPAs
-sudo add-apt-repository ppa:git-core/ppa -y         # Git Stable Releases
-sudo add-apt-repository ppa:deluge-team/stable -y   # Deluge Torrent
+sudo add-apt-repository ppa:git-core/ppa -y                 # Git Stable Release
+sudo add-apt-repository ppa:longsleep/golang-backports -y   # Go Stable Release
+sudo add-apt-repository ppa:deluge-team/stable -y           # Deluge Torrent Stable Release
 
 # NodeJS 14.x
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
@@ -48,6 +49,7 @@ sudo apt install \
   htop \
   zsh \
   git \
+  golang-1.15 \
   deluged deluge deluge-web \
   nodejs \
   yarn \

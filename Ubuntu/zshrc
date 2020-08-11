@@ -18,6 +18,7 @@ export LC_ALL=en_US.UTF-8
 
 # Setup PATH
 export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="/usr/lib/go-1.15/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 # Add any custom paths to `PATH` below
 
