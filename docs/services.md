@@ -7,6 +7,7 @@ Following are the instructions to configure various services on Ubuntu 20.04+.
 - [Deluge](#deluge-torrent--20)
 - [Plex](#plex)
 - [Nextcloud](#nextcloud)
+- [Nginx Reverse Proxy](#nginx-reverse-proxy)
 
 ### Samba
 
@@ -490,3 +491,274 @@ sudo snap enable nextcloud
 
 Once this is complete, you can navigate to `http://127.0.0.1:10000/index.php/settings/admin/externalstorages` and start
 adding folders from `/media/Store` into your Nextcloud.
+
+### Nginx Reverse Proxy
+
+After we configure Plex and Nextcloud, both of them are available inside your home network to be accessible
+on any device. However, if you want both those services to be accessible over the internet, you can do so by
+using Nginx as a plain HTTP proxy server that listens for any incoming requests and serves Plex or Nextcloud
+based on the URL used to access specific service.
+
+This is a multi-step process and here's a gist of how everything is wired up;
+
+1. Assign static local IP address to your computer which has Ubuntu installed and is running Plex/Nextcloud
+   using your network router settings.
+2. Enable Dynamic DNS support in your network router (in case your ISP doesn't provide you static IP).
+3. Enable port forwarding for port `80` (HTTP) and `443` (HTTPS) for your computer's local IP to same
+   external ports (`80` & `443`) in your router settings.
+4. Setup a domain and add a `CNAME` records for both Plex & Nextcloud which point to URL/IP provided by your
+   Dynamic DNS provider. This can also be the static IP in case your ISP has provided you with one.
+5. Add Nginx config for listening to incoming requests on port `80`/`443` and serve Plex & Nextcloud
+   based on URL used for the request.
+
+**Warning:** ⚠️ This process exposes your home network as well as your computer to the internet which is a recipe for
+disaster so only proceed if you know what you're doing and are willing to accept all the risks that it carries.
+
+Before we proceed further, we'll make some assumptions to make our config guide easier. For instance, the
+static IP that we'll assign to our computer will be `192.168.0.100`, while the domain that we own is
+`example.com`, of course replace both of them with your own IP and domain across the steps below.
+
+#### Step 1 &ndash; Assigning static IP to the computer
+
+This is a fairly straight-forward process and is something that you should ideally do for a computer that
+runs Plex or Nextcloud regardless of whether you want to setup reverse proxy. There are plenty of articles
+on the web which instruct on how to do that so I'm not going to repeat it here, just pointing to some of
+the links; [here][static_ip_1], [here][static_ip_2] and [here][static_ip_3].
+
+[static_ip_1]: https://in.pcmag.com/news/134526/how-to-set-up-a-static-ip-address
+[static_ip_2]: https://askubuntu.com/a/1171194/12242
+[static_ip_3]: https://itsfoss.com/static-ip-ubuntu/
+
+#### Step 2 &ndash; Enable Dynamic DNS
+
+Most internet service providers (ISP) have their customers assigned with a dynamic IP address, i.e. your IP address
+over the internet is not fixed and keeps changing every time you are connected. Which means anything that wants to
+connect to your computer using IP address can't work without a fixed IP. This is where we need a way to mask our
+dynamically changing IP as provided by ISP to a fixed IP or URL that is guaranteed to never change, thus making it
+easier to connect to our computer over the internet using the same.
+
+Most network routers support this ability to setup a third-party Dynamic DNS provider which ensures that a static IP
+or URL is kept up-to-date against ever-changing dynamic IP from our ISP. You can read more about it [here](https://en.wikipedia.org/wiki/Dynamic_DNS).
+
+There are several services allow you to use sign up for Dynamic DNS for free (or a very small fees), so sign up for
+one and configure it with your network router. Again, here are some links to figure out the same; [here][dyn_dns_1],
+[here][dyn_dns_2] and [here][dyn_dns_3].
+
+Once you're done configuring this, you should have a URL/IP provided by the Dynamic DNS service, make a note of this
+as we're going to need it in [Step 4](#step-4--setup-cname-records) of this guide.
+
+[dyn_dns_1]: https://www.howtogeek.com/66438/how-to-easily-access-your-home-network-from-anywhere-with-ddns/
+[dyn_dns_2]: https://www.noip.com/support/knowledgebase/how-to-configure-ddns-in-router/
+[dyn_dns_3]: https://help.dyn.com/remote-access/getting-started-with-remote-access/
+
+#### Step 3 &ndash; Enable Port Forwarding
+
+Once you're done with above steps, you can enable port-forwarding for TCP ports `80` and `443` in your network router
+for the IP address `192.168.0.100` (as assigned to our computer). There are guides available for the same so refer to
+[those](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/). Here's a summary of how it would
+look like in your router settings;
+
+| **Protocol** | **External Ports** | **Internal IP Address** | **Internal Port** |
+| ------------ | ------------------ | ----------------------- | ----------------- |
+| TCP/UDP      | 80                 | 192.168.0.100           | 80                |
+| TCP/UDP      | 443                | 192.168.0.100           | 443               |
+
+Notice how both external and internal port values are the same.
+
+#### Step 4 &ndash; Setup CNAME Records
+
+Going through all the trouble as mentioned above only makes sense if you can conveniently access your home server
+from anywhere on the internet using an easy to remember URL. So let's assume that we want our Nextcloud installation
+to be accessible using the url `mycloud.example.com`, while for Plex, we want it to be `movies.example.com`. Noticed
+how only `mycloud` and `movies` are different while rest of the domain is same, those terms we defined are called
+subdomains, and those are configured by adding a `CNAME` record in your Domain settings (using your domain provider's
+portal). Here, we'll use the IP/URL as provided by Dynamic DNS provider from [Step 2](#step-2--enable-dynamic-dns). In
+case you're using GoDaddy as your domain host, you can follow [their guide](https://in.godaddy.com/help/add-a-cname-record-19236)
+to add `CNAME` record. In case you're not using GoDaddy, steps largely remain the same, just follow your provider's
+instructions to do so.
+
+We need to make sure that we add 2 `CNAME` records with names `mycloud` and `movies` respectively, while both of them
+having the same Dynamic-DNS-provided URL as value. Here's a screenshot of how it'll look like once you are done adding
+the records;
+
+![DNS Records](https://i.imgur.com/yQ6L2cC.png)
+
+#### Step 5 &ndash; Configure Nginx
+
+Finally this is the step where everything is tied together. Start by making sure you have Nginx installed;
+
+```bash
+sudo apt install nginx
+```
+
+Once you have it installed, verify if nginx server is running by doing `sudo service nginx status`. If it is
+running, you should see it log something like;
+
+```bash
+● nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2020-08-11 10:10:31 IST; 7h ago
+       Docs: man:nginx(8)
+    Process: 1149 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+    Process: 1266 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+   Main PID: 1279 (nginx)
+      Tasks: 17 (limit: 19004)
+     Memory: 19.7M
+     CGroup: /system.slice/nginx.service
+             ├─1279 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+             ├─1280 nginx: worker process
+             ...
+             ...
+```
+
+Notice the line `Active: active (running)`, that means it is running.
+
+Now we first need to remove default site config that nginx comes with, we can do so by running;
+
+```bash
+sudo unlink /etc/nginx/sites-enabled/default
+```
+
+Once done, let's start configuring both Nextcloud and Plex configs for nginx one by one;
+
+##### Nextcloud on Nginx
+
+Create a config file and open it for editing by running;
+
+```bash
+sudo nano /etc/nginx/sites-available/mycloud.example.com.conf
+```
+
+Now add following contents to the file;
+
+```bash
+server {
+    listen 80;
+    server_name mycloud.example.com;
+    location / {
+        proxy_pass http://127.0.0.1:10000;
+    }
+}
+```
+
+Assuming you have Nextcloud running on port `10000`, above config will listen for incoming HTTP requests on port `80`
+and serve your Nextcloud instance if the URL used was `mycloud.example.com`. Save the file and exit.
+
+Now verify if your config is correct by running `sudo nginx -t`, as long as you followed above setup (and just replaced
+value for `server_name`, it should work just fine). Once the command reports that there isn't any problem with your nginx
+config, you can enable this site config by symlinking it to `/etc/nginx/sites-enabled` directory by running;
+
+```bash
+sudo ln -s /etc/nginx/sites-available/mycloud.example.com.conf /etc/nginx/sites-enabled/mycloud.example.com.conf
+```
+
+Once the symlinking is done, restart nginx service using `sudo service nginx restart`. At this point, you should be
+able to access your Nextcloud instance using `mycloud.example.com` URL in your web browser.
+
+###### HTTPS for Nextcloud
+
+At this point, you can optionally enable HTTPS for Nextcloud as it supports LetsEncrypt based SSL. Start by first
+enabling SSL in your Nextcloud instance using following command;
+
+```bash
+sudo nextcloud.enable-https lets-encrypt
+```
+
+This step will ask a couple of questions like ensuring you have relevant ports being forwarded, default email address
+for recovery and the domain name to issue SSL certificate against. You can confirm first question, provide your
+email addres in response to second question and for the domain, provide `mycloud.example.com` as it is the domain
+we're going to use to access Nextcloud over the internet. Once done, this will issue the SSL cert for the Nextcloud
+installation.
+
+Once above command completes, we need to re-configure our nginx config for Nextcloud to make sure it serves the instance
+over HTTPS (and does redirect for HTTP requests). Start by first removing the existing nginx config for Nextcloud by
+running;
+
+```bash
+sudo unlink /etc/nginx/sites-enabled/mycloud.example.com.conf
+```
+
+Now open the config that we created earlier for editing;
+
+```bash
+sudo nano /etc/nginx/sites-available/mycloud.example.com.conf
+```
+
+You'll see the contents that we had added earlier, so let's remove it all and replace it with following config;
+
+```bash
+# HTTP Redirection Config
+server {
+    listen 80;
+    listen [::]:80;
+    server_name mycloud.example.com;
+    return 301 https://$server_name$request_uri;
+}
+
+# HTTPS Config
+server {
+    # Listen for HTTPS
+    listen 443 ssl;
+
+    # Domain to map against
+    server_name mycloud.example.com;
+
+    # Enable client to upload files up to 16GB
+    client_max_body_size 16G;
+
+    # SSL Certs
+    ssl_certificate /var/snap/nextcloud/current/certs/live/fullchain.pem;
+    ssl_certificate_key /var/snap/nextcloud/current/certs/live/privkey.pem;
+
+    location / {
+        proxy_pass https://127.0.0.1:10001;
+    }
+}
+```
+
+Now let's go through what we added above;
+
+- First block of the config sets a `301` redirect by forwarding all HTTP
+  requests to HTTPS.
+- Second block enables HTTPS instance of Nextcloud by listening to incoming
+  requests on port `443` and serves Nextcloud's SSL enabled version running
+  on port `10001`.
+- We specify SSL cert and key file's path manually based on where Snap package
+  stores it.
+
+Now save the file and exit and run `sudo nginx -t` to ensure that config doesn't have any errors.
+
+If it passed, finally enable this config by running;
+
+```bash
+sudo ln -s /etc/nginx/sites-available/mycloud.example.com.conf /etc/nginx/sites-enabled/mycloud.example.com.conf
+```
+
+Once done, restart nginx by running `sudo service nginx restart`. At this point, you should be able to access
+Nextcloud using the URL `https://mycloud.example.com`.
+
+##### Plex on Nginx
+
+Steps to enable Plex in Nginx are largely the same as Nextcloud so I'll just share a sample config that we can use for
+Plex;
+
+```bash
+server {
+    listen 80;
+    server_name movies.example.com;
+    location / {
+        proxy_pass http://127.0.0.1:32400;
+    }
+}
+```
+
+Follow the same commands use to create config file and enabling the config, just name the file different (eg; `movies.example.com.conf`).
+This also assumes that your Plex server is running on port `32400`, in case you're using different port, be sure to mention the same here.
+
+Additionally, you'll need to enable [Remote Access](https://support.plex.tv/articles/200289506-remote-access/) from your Plex Media Server
+settings interface. Once it is done, restart nginx service and you should be able to access Plex using `http://movies.example.com` from
+your web browser.
+
+###### HTTPS for Plex
+
+TBA
