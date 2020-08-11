@@ -47,6 +47,7 @@ sudo apt install \
   openssh-server \
   nginx \
   htop \
+  ffmpeg \
   zsh \
   git \
   golang-1.15 \

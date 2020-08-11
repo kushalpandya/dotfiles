@@ -36,6 +36,7 @@ brew install wget --with-iri
 brew install grep
 brew install openssh
 brew install p7zip
+brew install ffmpeg
 
 # Compilers & Image manipulation
 brew install gcc
