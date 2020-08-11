@@ -20,3 +20,4 @@ install_font font-cascadia
 install_font font-source-code-pro
 install_font font-source-sans-pro
 install_font font-source-serif-pro
+install_font font-caladea
