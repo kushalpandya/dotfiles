@@ -6,7 +6,7 @@ Following are the instructions to configure various services on Ubuntu 20.04+.
 - [OpenSSH](#openssh)
 - [Deluge](#deluge-torrent--20)
 - [Plex](#plex)
-- [NextCloud](#nextcloud)
+- [Nextcloud](#nextcloud)
 
 ### Samba
 
@@ -367,16 +367,16 @@ sudo rm Library.tar.gz
 sudo rm -rf Library.old
 ```
 
-### NextCloud
+### Nextcloud
 
 #### Installation
 
-There are several ways to install NextCloud on Ubuntu, like [manual installation](https://docs.nextcloud.com/server/18/admin_manual/installation/source_installation.html),
+There are several ways to install Nextcloud on Ubuntu, like [manual installation](https://docs.nextcloud.com/server/18/admin_manual/installation/source_installation.html),
 [Docker](https://hub.docker.com/_/nextcloud/) or using [Snap package](https://snapcraft.io/nextcloud). Given that both
 manual and docker installation methods involved additional dependencies. We are going to use Snap package method as
 is self-contained and doesn't include any external dependencies.
 
-If you're running Ubuntu 18.04 or above, `snap` support is already included in your OS, to install NextCloud,
+If you're running Ubuntu 18.04 or above, `snap` support is already included in your OS, to install Nextcloud,
 you need to run;
 
 ```bash
@@ -386,7 +386,7 @@ sudo snap install nextcloud
 #### Configure Ports and Trusted Domains
 
 Once installation is complete, we need to perform additional steps to define
-default port and add trusted domains from which NextCloud is accessible on the network.
+default port and add trusted domains from which Nextcloud is accessible on the network.
 
 To define default port, run;
 
@@ -397,11 +397,11 @@ sudo snap set nextcloud ports.http=10000 ports.https=10001
 Notice that we have set port `10000` as default for HTTP while `10001` for HTTPS, You can change it to any
 other port as well.
 
-At this point, NextCloud Web UI can be accessed in the browser using `http://localhost:10000`, be sure
+At this point, Nextcloud Web UI can be accessed in the browser using `http://localhost:10000`, be sure
 to visit that URL first and go through the setup (like setting up default user and password).
 
-Now,we want our NextCloud instance to be accessible from other devices on our network as well. So now we
-need to add our server's IP to NextCloud trusted domain by running;
+Now,we want our Nextcloud instance to be accessible from other devices on our network as well. So now we
+need to add our server's IP to Nextcloud trusted domain by running;
 
 ```bash
 sudo snap run nextcloud.occ config:system:set trusted_domains 1 --value=192.168.0.100
@@ -413,7 +413,7 @@ You can add additional domains by running above command with modified number and
 sudo snap run nextcloud.occ config:system:set trusted_domains 2 --value=127.0.0.1
 ```
 
-Once done, restart NextCloud server by running;
+Once done, restart Nextcloud server by running;
 
 ```
 sudo snap restart nextcloud
@@ -421,12 +421,12 @@ sudo snap restart nextcloud
 
 #### Mounting External Storage
 
-By default, NextCloud maintains files and folders in its own directory but in case you have different partitions
-in your server containing media files and any other data and if you wish to access those using NextCloud, you can
-enable it by using _External Storage_ feature of NextCloud.
+By default, Nextcloud maintains files and folders in its own directory but in case you have different partitions
+in your server containing media files and any other data and if you wish to access those using Nextcloud, you can
+enable it by using _External Storage_ feature of Nextcloud.
 
 Start by first enabling _External Storage support_ app, this can be located in`/index.php/settings/apps/featured/files_external` page.
-Once that is done, connect NextCloud to external storage by running;
+Once that is done, connect Nextcloud to external storage by running;
 
 ```bash
 sudo snap connect nextcloud:removable-media
@@ -439,13 +439,13 @@ you need to first create a dedicated `Nextcloud` directory within `/media/Store`
 mkdir /media/Store/Nextcloud
 ```
 
-Once done, we need to move NextCloud default data directory over to our newly created directory;
+Once done, we need to move Nextcloud default data directory over to our newly created directory;
 
 ```bash
-sudo mv /var/snap/nextcloud/common/nextcloud/data /media/Store/NextCloud
+sudo mv /var/snap/nextcloud/common/nextcloud/data /media/Store/Nextcloud
 ```
 
-Once this is done, next step is to edit `config.php` of NextCloud;
+Once this is done, next step is to edit `config.php` of Nextcloud;
 
 ```bash
 sudo nano /var/snap/nextcloud/current/nextcloud/config/config.php
@@ -458,7 +458,7 @@ Here, change following config as;
 ```
 
 Save and exit the file, now, depending on how your data directory partition is mounted,
-we need to disable NextCloud for a bit to update data directory permissions;
+we need to disable Nextcloud for a bit to update data directory permissions;
 
 ```bash
 sudo snap disable nextcloud
@@ -482,11 +482,11 @@ following line below `datadirectory` config within `/var/snap/nextcloud/current/
 'check_data_directory_permissions' => false,
 ```
 
-Now finally enable NextCloud again
+Now finally enable Nextcloud again
 
 ```bash
 sudo snap enable nextcloud
 ```
 
 Once this is complete, you can navigate to `http://127.0.0.1:10000/index.php/settings/admin/externalstorages` and start
-adding folders from `/media/Store` into your NextCloud.
+adding folders from `/media/Store` into your Nextcloud.
