@@ -8,7 +8,7 @@ sudo add-apt-repository ppa:phoerious/keepassxc -y        # KeePass Desktop Clie
 sudo add-apt-repository ppa:rikmills/latte-dock -y        # Latte Dock
 
 # Add Kubuntu Backports PPA in case of distro being Kubuntu
-if [[ "$XDG_CURRENT_DESKTOP" == "KDE" ]] && [[ $(lsb_release -is) == 'Ubuntu' ]]; then
+if [[ "$XDG_CURRENT_DESKTOP" == "KDE" ]] && [[ $(lsb_release -is) == "Ubuntu" ]]; then
   sudo add-apt-repository ppa:kubuntu-ppa/backports -y    # Kubuntu Backports for KDE
 fi
 
@@ -48,7 +48,7 @@ elif [[ "$XDG_CURRENT_DESKTOP" == "KDE" ]]; then
     -y
   
   # Install LibreOffice for KDE Neon as it isn't included by default
-  if [[ $(lsb_release -is) == 'Neon' ]]; then
+  if [[ $(lsb_release -is) == "Neon" ]]; then
     sudo apt install \
       libreoffice \
       libreoffice-plasma \
