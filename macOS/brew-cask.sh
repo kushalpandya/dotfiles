@@ -7,7 +7,7 @@ brew cask install gimp
 brew cask install libreoffice
 brew cask install numi
 brew cask install pencil
-brew cask install macpass
+brew cask install keepassxc
 brew cask install teamviewer
 
 ## Web Browsers
@@ -15,6 +15,7 @@ brew cask install google-chrome
 brew cask install chromedriver
 brew cask install firefox
 brew cask install opera
+brew cask install microsoft-edge
 
 ## Cloud Storage Providers
 brew cask install insync
