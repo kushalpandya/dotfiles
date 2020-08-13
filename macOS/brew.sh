@@ -50,17 +50,3 @@ brew install rbenv
 brew install go
 brew install node
 brew install yarn
-
-# GitLab Development Kit tools
-brew install redis
-brew install postgresql@11
-brew install libiconv
-brew install pkg-config
-brew install cmake
-brew install openssl
-brew install re2
-brew install graphicsmagick
-brew install gpg
-brew install runit
-brew install icu4c
-brew install exiftool
