@@ -31,6 +31,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   ./macOS/brew.sh
   ./common/brew.sh
 
+  echo_e "Running asdf plugins setup"
+  ./common/asdf-plugins.sh
+
   # Prompt for GUI package installations
   echo_q "Do you want to run Homebrew Cask for GUI apps? [y/n]"
   read answer
@@ -52,7 +55,9 @@ else
 
   echo_e "Running apt for non-GUI packages"
   ./Ubuntu/apt-cli.sh
-  ./Ubuntu/rbenv.sh
+
+  echo_e "Running asdf plugins setup"
+  ./common/asdf-plugins.sh
 
   # Prompt for GUI package installations
   echo_q "Do you want to run apt for GUI packages? [y/n]"
@@ -87,4 +92,4 @@ fi
 echo_e "Loading global default Git config"
 cp $PWD/common/.gitconfig ~/
 
-echo_e "Installation Complete!"
+echo_e "Installation Complete, be sure to restart your system before using!"

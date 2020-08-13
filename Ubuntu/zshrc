@@ -8,7 +8,7 @@ ZSH_THEME="avit-arrow"
 CASE_SENSITIVE="true"
 
 # Load Plugins
-plugins=(git zsh-completions zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git asdf zsh-completions zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -17,16 +17,14 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # Setup PATH
-export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH="/usr/lib/go-1.15/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 # Add any custom paths to `PATH` below
 
 # Setup SSH agent
 eval "$(ssh-agent -s)" > /dev/null
 
-# Setup rbenv
-eval "$(rbenv init -)"
+# Setup asdf
+. $HOME/.asdf/asdf.sh
 
 # Setup Homebrew for Linux
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

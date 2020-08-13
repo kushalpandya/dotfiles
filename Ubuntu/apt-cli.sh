@@ -15,7 +15,6 @@ sudo apt install \
 
 # Launchpad PPAs
 sudo add-apt-repository ppa:git-core/ppa -y                 # Git Stable Release
-sudo add-apt-repository ppa:longsleep/golang-backports -y   # Go Stable Release
 sudo add-apt-repository ppa:deluge-team/stable -y           # Deluge Torrent Stable Release
 
 # NodeJS 14.x
@@ -50,10 +49,25 @@ sudo apt install \
   ffmpeg \
   zsh \
   git \
-  golang-1.15 \
   deluged deluge deluge-web \
   nodejs \
   yarn \
   docker-ce docker-ce-cli containerd.io \
   plexmediaserver \
   -y
+
+# Install asdf Ruby plugin dependencies
+sudo apt install \
+  libssl-dev \
+  libyaml-dev \
+  libreadline6-dev \
+  zlib1g-dev \
+  libncurses5-dev \
+  libffi-dev \
+  libgdbm6 \
+  libgdbm-dev \
+  libdb-dev \
+  -y
+
+# Install asdf
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0-rc1

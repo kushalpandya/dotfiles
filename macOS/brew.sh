@@ -46,7 +46,6 @@ brew install git
 brew install git-lfs
 
 # Ruby, Go, Node & its package managers
-brew install rbenv
-brew install go
+brew install asdf
 brew install node
 brew install yarn

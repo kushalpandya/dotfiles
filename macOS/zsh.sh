@@ -9,6 +9,4 @@ if [[ $(zsh --version) != '' ]]; then
 
   # Copy .zshrc
   cp $PWD/macOS/zshrc ~/.zshrc
-
-  source ~/.zshrc
 fi
