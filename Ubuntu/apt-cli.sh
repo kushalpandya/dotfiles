@@ -43,6 +43,7 @@ sudo apt install \
   neofetch \
   samba \
   net-tools \
+  wavemon \
   openssh-server \
   nginx \
   htop \
