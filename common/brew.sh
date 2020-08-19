@@ -4,5 +4,9 @@
 brew install diff-so-fancy
 brew install ytop
 brew install bat
-brew install imagemagick --with-webp
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  brew install imagemagick --with-webp
+else
+  brew install imagemagick
+fi
 brew install youtube-dl
