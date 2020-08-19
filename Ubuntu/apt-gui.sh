@@ -6,6 +6,7 @@ sudo add-apt-repository ppa:libreoffice/ppa -y            # LibreOffice Stable R
 sudo add-apt-repository ppa:phoerious/keepassxc -y        # KeePass Desktop Client
 # sudo add-apt-repository ppa:otto-kesselgulasch/gimp -y  # GIMP (disabled for now)
 sudo add-apt-repository ppa:rikmills/latte-dock -y        # Latte Dock
+sudo add-apt-repository ppa:solaar-unifying/stable        # Solaar for Logitech Devices
 
 # Add Kubuntu Backports PPA in case of distro being Kubuntu
 if [[ "$XDG_CURRENT_DESKTOP" == "KDE" ]] && [[ $(lsb_release -is) == "Ubuntu" ]]; then
@@ -73,6 +74,7 @@ fi
 sudo apt install \
   vlc \
   flameshot \
+  solaar \
   grub-customizer \
   grsync \
   gimp \
