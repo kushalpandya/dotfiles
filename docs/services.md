@@ -27,13 +27,6 @@ Edit Samba config;
 sudo nano /etc/samba/smb.conf
 ```
 
-Add following line under `[global]` section (within `Network` sub-category), it is
-responsible for faster IO over the network ([source](https://calomel.org/samba.html));
-
-```
-socket options = TCP_NODELAY IPTOS_LOWDELAY SO_RCVBUF=65536 SO_SNDBUF=65536
-```
-
 Add shares with Guest access by adding following blocks at the end of config file (below
 is an example of a directory, you can add as many as you want);
 
