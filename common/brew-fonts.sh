@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+shopt -s expand_aliases
 # Setup OS-specific install command alias
 if [[ "$OSTYPE" == "darwin"* ]]; then
   # macOS; use `brew cask`
@@ -20,4 +21,3 @@ install_font font-cascadia
 install_font font-source-code-pro
 install_font font-source-sans-pro
 install_font font-source-serif-pro
-install_font font-caladea
