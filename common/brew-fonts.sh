@@ -21,3 +21,12 @@ install_font font-cascadia
 install_font font-source-code-pro
 install_font font-source-sans-pro
 install_font font-source-serif-pro
+install_font font-meslo-lg
+install_font font-meslo-lg-nerd-font
+install_font font-meslo-for-powerline
+
+# Setup symlinks and clear fonts cache in Linux
+if [[ "$OSTYPE" == "linux"* ]]; then
+  ln -s /home/linuxbrew/.linuxbrew/share/fonts ~/.local/share/fonts
+  fc-cache -fv
+fi
