@@ -63,7 +63,7 @@ else
   echo_q "Do you want to run apt for GUI packages? [y/n]"
   read answer
   if [ "$answer" != "${answer#[Yy]}" ]; then
-    sudo -E ./Ubuntu/apt-gui.sh
+    ./Ubuntu/apt-gui.sh
   else
     echo_e "Skipped GUI packages installation"
   fi
@@ -83,7 +83,7 @@ fi
 echo_q "Do you want to install some extra monospaced fonts? [y/n]"
 read answer
 if [ "$answer" != "${answer#[Yy]}" ]; then
-  sudo -E ./common/brew-fonts.sh
+  ./common/brew-fonts.sh
 else
   echo_e "Skipped fonts installation"
 fi
