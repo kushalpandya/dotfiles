@@ -58,6 +58,11 @@ elif [[ "$XDG_CURRENT_DESKTOP" == "KDE" ]]; then
       libreoffice-style-* \
       -y
   fi
+
+  # Install Konsole Color Schemes
+  wget -O - https://github.com/mbadolato/iTerm2-Color-Schemes/archive/master.tar.gz | \
+    tar -xz --strip=2 -C ~/.local/share/konsole/ iTerm2-Color-Schemes-master/konsole
+
 elif [[ "$XDG_CURRENT_DESKTOP" == "XFCE" ]]; then
   sudo apt install \
     xubuntu-restricted-extras \
