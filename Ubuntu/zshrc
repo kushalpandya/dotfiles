@@ -21,7 +21,9 @@ export PATH="$HOME/.local/bin:$PATH"
 # Add any custom paths to `PATH` below
 
 # Setup SSH agent
-eval "$(ssh-agent -s)" > /dev/null
+if [ $(ps -ef | grep "ssh-agent" | grep -v "grep" | wc -l) -eq 0 ]; then
+  eval "$(ssh-agent -s)" > /dev/null
+fi
 
 # Setup asdf
 . $HOME/.asdf/asdf.sh
