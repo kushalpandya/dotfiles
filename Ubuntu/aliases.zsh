@@ -1,4 +1,5 @@
-alias updateall="sudo apt update && sudo apt upgrade -y && sudo apt autoremove && sudo apt autoclean && brew update && brew upgrade"
+alias aptupdate="sudo apt update && sudo apt upgrade -y && sudo apt autoremove && sudo apt autoclean"
+alias brewupdate="brew update && brew upgrade"
 alias purgeoldkernels="sudo apt-get purge $(dpkg-query -W -f'${Package}\n' 'linux-*' | sed -nr 's/.*-([0-9]+(\.[0-9]+){2}-[^-]+).*/\1 &/p' | linux-version sort | awk '($1==c){exit} {print $2}' c=$(uname -r | cut -f1,2 -d-))"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="hostname -I"
