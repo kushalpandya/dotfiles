@@ -4,5 +4,5 @@ alias purgeoldkernels="sudo apt-get purge $(dpkg-query -W -f'${Package}\n' 'linu
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="hostname -I"
 alias pip="pip3"
-alias monitor="ytop -p -s"
+alias monitor="btm --hide_table_gap"
 alias network="wavemon"

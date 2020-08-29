@@ -14,4 +14,4 @@ test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew
 # Homebrew Linux Taps
 brew tap linuxbrew/fonts
 brew tap linuxbrew/xorg
-brew tap cjbassi/ytop
+brew tap clementtsang/bottom

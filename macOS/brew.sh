@@ -18,6 +18,7 @@ fi
 
 # Homebrew macOS Taps
 brew tap homebrew/cask-fonts
+brew tap clementtsang/bottom
 
 # Install GNU core utilities (those that come with macOS are outdated).
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.

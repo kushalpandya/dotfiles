@@ -2,7 +2,7 @@
 
 # Install packages
 brew install diff-so-fancy
-brew install ytop
+brew install bottom
 brew install bat
 if [[ "$OSTYPE" == "darwin"* ]]; then
   brew install imagemagick --with-webp
