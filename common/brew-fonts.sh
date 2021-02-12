@@ -4,7 +4,7 @@ shopt -s expand_aliases
 # Setup OS-specific install command alias
 if [[ "$OSTYPE" == "darwin"* ]]; then
   # macOS; use `brew cask`
-  alias install_font="brew cask install"
+  alias install_font="brew install --cask"
 else
   # Setup brew for current env
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

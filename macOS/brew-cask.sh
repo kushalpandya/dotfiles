@@ -1,35 +1,35 @@
 #!/usr/bin/env bash
 
 ## Productivity
-brew cask install the-unarchiver
-brew cask install iterm2
-brew cask install gimp
-brew cask install libreoffice
-brew cask install numi
-brew cask install pencil
-brew cask install keepassxc
-brew cask install teamviewer
+brew install --cask the-unarchiver
+brew install --cask iterm2
+brew install --cask gimp
+brew install --cask libreoffice
+brew install --cask numi
+brew install --cask pencil
+brew install --cask keepassxc
+brew install --cask teamviewer
 
 ## Web Browsers
-brew cask install google-chrome
-brew cask install chromedriver
-brew cask install firefox
-brew cask install opera
-brew cask install microsoft-edge
+brew install --cask google-chrome
+brew install --cask chromedriver
+brew install --cask firefox
+brew install --cask opera
+brew install --cask microsoft-edge
 
 ## Cloud Storage Providers
-brew cask install insync
-brew cask install dropbox
+brew install --cask insync
+brew install --cask dropbox
 
 ## Text Editors
-brew cask install visual-studio-code
-brew cask install atom
-brew cask install sublime-text
+brew install --cask visual-studio-code
+brew install --cask atom
+brew install --cask sublime-text
 
 ## Multimedia
-brew cask install vlc
-brew cask install spotify
+brew install --cask vlc
+brew install --cask spotify
 
 ## Work Tools
-brew cask install zoomus
-brew cask install slack
+brew install --cask zoomus
+brew install --cask slack
