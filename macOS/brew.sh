@@ -33,7 +33,7 @@ brew install gnu-sed --with-default-names
 
 # Install system & networking tools
 brew install zsh
-brew install wget --with-iri
+brew install wget
 brew install grep
 brew install openssh
 brew install p7zip
@@ -48,5 +48,3 @@ brew install git-lfs
 
 # Ruby, Go, Node & its package managers
 brew install asdf
-brew install node
-brew install yarn
