@@ -5,7 +5,7 @@ and Ubuntu post-OS-install configuration.
 
 # Supported OSs
 
-This project is tested on [macOS Catalina][catalina] and [Ubuntu 20.04][ubuntu]
+This project is tested on [macOS Monterey][catalina] and [Ubuntu 20.04][ubuntu]
 (and its [derivatives][flavours]).
 
 For Ubuntu derivatives, script tries to identify the desktop environment and install
@@ -55,7 +55,7 @@ If you absolutely need one, then [MIT][mit], there you go.
 
 ### [Kushal Pandya](https://doublslash.com/about/)
 
-[catalina]: https://www.apple.com/in/macos/catalina/
+[catalina]: https://www.apple.com/in/macos/monterey/
 [ubuntu]: https://releases.ubuntu.com/20.04/
 [flavours]: https://ubuntu.com/download/flavours
 [debian]: https://www.debian.org/News/2020/20200801
