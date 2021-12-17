@@ -1,0 +1,86 @@
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/cask-fonts"
+tap "homebrew/core"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
+# Good-lookin' diffs with diff-highlight and more
+brew "diff-so-fancy"
+# Collection of GNU find, xargs, and locate
+brew "findutils"
+# GNU compiler collection
+brew "gcc"
+# Distributed revision control system
+brew "git"
+# Git extension for versioning large files
+brew "git-lfs"
+# GNU Pretty Good Privacy (PGP) package
+brew "gnupg"
+# Mac App Store command-line interface
+brew "mas"
+# Collection of tools that nobody wrote when UNIX was young
+brew "moreutils"
+# Free (GNU) replacement for the Pico text editor
+brew "nano"
+# Internet file retriever
+brew "wget"
+# Download YouTube videos from the command-line
+brew "youtube-dl"
+# UNIX shell (command interpreter)
+brew "zsh"
+# Menu bar icon organizer
+cask "bartender"
+# Web browser
+cask "firefox"
+# Typeface made for developers
+cask "font-jetbrains-mono"
+cask "font-jetbrains-mono-nerd-font"
+cask "font-meslo-lg"
+cask "font-meslo-lg-nerd-font"
+# Web browser
+cask "google-chrome"
+# Menu bar application that displays the CPU speed limit due to thermal issues
+cask "hot"
+# Free and open-source media player
+cask "iina"
+# Manage your Google Drive and OneDrive files
+cask "insync"
+# Terminal emulator as alternative to Apple's Terminal app
+cask "iterm2"
+# Password manager app
+cask "keepassxc"
+# Office suite
+cask "libreoffice"
+# Provides updates to various Microsoft products
+cask "microsoft-auto-update"
+# Web browser
+cask "microsoft-edge"
+# Office suite
+cask "microsoft-office"
+# Calculator and converter application
+cask "numi"
+# Web browser
+cask "opera"
+# Team communication and collaboration software
+cask "slack"
+# Music streaming service
+cask "spotify"
+# Text editor for code, markup and prose
+cask "sublime-text"
+# Remote access and connectivity software focused on security
+cask "teamviewer"
+# Unpacks archive files
+cask "the-unarchiver"
+# Open-source BitTorrent client
+cask "transmission"
+# Open-source code editor
+cask "visual-studio-code"
+# View output from scripts in the menu bar
+cask "xbar"
+mas "Amphetamine", id: 937984704
+mas "Dato", id: 1470584107
+mas "Magnet", id: 441258766
+mas "Pixelmator Pro", id: 1289583905
+mas "Shareful", id: 1522267256

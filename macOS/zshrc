@@ -1,33 +1,17 @@
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-# Default theme
+# Zsh Configuration
+export ZSH="/Users/kushal/.oh-my-zsh"
 ZSH_THEME="avit-arrow"
-
-# Use case-sensitive completion.
-CASE_SENSITIVE="true"
-
-# Load Plugins
-plugins=(git asdf zsh-completions zsh-autosuggestions zsh-syntax-highlighting)
-
+plugins=(
+  macos
+  git
+  asdf
+  zsh-completions
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
 source $ZSH/oh-my-zsh.sh
 
-# Setup Locale, change it to your default locale
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-
-# Setup PATH
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
-# Add any custom paths to `PATH` below
-
-# Setup SSH agent
-if [ $(ps -ef | grep "ssh-agent" | grep -v "grep" | wc -l) -eq 0 ]; then
-  eval "$(ssh-agent -s)" > /dev/null
-fi
-
-# Setup asdf
-. $(brew --prefix asdf)/asdf.sh
-
-# Add SSH Keys
-# Update and uncomment following line for each keypair.
-# ssh-add -q ~/.ssh/id_rsa
+# User configuration
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"

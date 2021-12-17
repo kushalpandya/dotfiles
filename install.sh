@@ -27,20 +27,15 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   echo "Setting up script permissions"
   chmod +x $PWD/macOS/*.sh
 
-  echo_e "Running Homebrew for non-GUI packages"
-  ./macOS/brew.sh
-  ./common/brew.sh
+  echo_e "Running asdf install"
+  ./common/asdf.sh
 
-  echo_e "Running asdf plugins setup"
-  ./common/asdf-plugins.sh
-
-  # Prompt for GUI package installations
-  echo_q "Do you want to run Homebrew Cask for GUI apps? [y/n]"
+  echo_q "Do you want to run Homebrew bundle install? [y/n]"
   read answer
   if [ "$answer" != "${answer#[Yy]}" ]; then
-    ./macOS/brew-cask.sh
+    ./macOS/brew.sh
   else
-    echo_e "Skipped GUI packages installation"
+    echo_e "Skipped Homebrew bundle install"
   fi
 
   echo_e "Setting up Zsh with Oh-my-zsh"
@@ -56,8 +51,8 @@ else
   echo_e "Running apt for non-GUI packages"
   ./Ubuntu/apt-cli.sh
 
-  echo_e "Running asdf plugins setup"
-  ./common/asdf-plugins.sh
+  echo_e "Running asdf install"
+  ./common/asdf.sh
 
   # Prompt for GUI package installations
   echo_q "Do you want to run apt for GUI packages? [y/n]"
@@ -72,21 +67,15 @@ else
 
   echo_e "Running Homebrew for non-GUI packages"
   ./Ubuntu/brew.sh
-  ./common/brew.sh
 
   echo_e "Setting up Zsh with Oh-my-zsh"
   ./common/zsh.sh
   ./Ubuntu/zsh.sh
 fi
 
-# Prompt for Fonts installation
-echo_q "Do you want to install some extra monospaced fonts? [y/n]"
-read answer
-if [ "$answer" != "${answer#[Yy]}" ]; then
-  ./common/brew-fonts.sh
-else
-  echo_e "Skipped fonts installation"
-fi
+# Load Nano config
+echo_e "Configuring GNU Nano editor"
+./common/nano.sh
 
 # Load Git Config
 echo_e "Loading global default Git config"
