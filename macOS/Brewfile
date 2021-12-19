@@ -8,6 +8,8 @@ brew "bat"
 brew "coreutils"
 # Good-lookin' diffs with diff-highlight and more
 brew "diff-so-fancy"
+# Tool for managing dock items
+brew "dockutil"
 # Collection of GNU find, xargs, and locate
 brew "findutils"
 # GNU compiler collection
