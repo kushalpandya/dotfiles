@@ -2,14 +2,26 @@ tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
+tap "homebrew/services"
+tap "ngrok/ngrok"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@1.1"
+# Yet another cross-platform graphical process/system monitor
+brew "bottom"
+# Cross-platform make
+brew "cmake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# Get a file from an HTTP, HTTPS or FTP server
+brew "curl"
 # Good-lookin' diffs with diff-highlight and more
 brew "diff-so-fancy"
-# Tool for managing dock items
-brew "dockutil"
+# Debian package management system
+brew "dpkg"
+# Perl lib for reading and writing EXIF metadata
+brew "exiftool"
 # Collection of GNU find, xargs, and locate
 brew "findutils"
 # GNU compiler collection
@@ -18,27 +30,54 @@ brew "gcc"
 brew "git"
 # Git extension for versioning large files
 brew "git-lfs"
+# GNU implementation of the famous stream editor
+brew "gnu-sed"
+# Manage compile and link flags for libraries
+brew "pkg-config"
+# Library for command-line editing
+brew "readline"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
-# Mac App Store command-line interface
-brew "mas"
+# Library access to GnuPG
+brew "gpgme"
+# Image processing tools collection
+brew "graphicsmagick"
+# C/C++ and Java libraries for Unicode and globalization
+brew "icu4c"
+# Conversion library
+brew "libiconv"
 # Collection of tools that nobody wrote when UNIX was young
 brew "moreutils"
 # Free (GNU) replacement for the Pico text editor
 brew "nano"
+# OpenBSD freely-licensed SSH connectivity tools
+brew "openssh"
+# ISO-C API and CLI for generating UUIDs
+brew "ossp-uuid"
+# 7-Zip (high compression file archiver) implementation
+brew "p7zip"
+# Lightweight BitTorrent client
+brew "transmission-cli", restart_service: true
 # Internet file retriever
 brew "wget"
 # Download YouTube videos from the command-line
 brew "youtube-dl"
+# General-purpose lossless data-compression library
+brew "zlib"
 # UNIX shell (command interpreter)
 brew "zsh"
+# Transfer files from and to an Android smartphone
+cask "android-file-transfer"
 # Menu bar icon organizer
 cask "bartender"
+# System-wide audio equalizer
+cask "eqmac"
 # Web browser
 cask "firefox"
 # Typeface made for developers
 cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
+cask "font-meslo-for-powerline"
 cask "font-meslo-lg"
 cask "font-meslo-lg-nerd-font"
 # Web browser
@@ -51,8 +90,12 @@ cask "iina"
 cask "insync"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
+# Keyboard customizer
+cask "karabiner-elements"
 # Password manager app
 cask "keepassxc"
+# Free and open-source painting and sketching program
+cask "krita"
 # Office suite
 cask "libreoffice"
 # Provides updates to various Microsoft products
@@ -61,6 +104,10 @@ cask "microsoft-auto-update"
 cask "microsoft-edge"
 # Office suite
 cask "microsoft-office"
+# Reverse proxy, secure introspectable tunnels to localhost
+cask "ngrok"
+# App to write, plan, collaborate, and get organized
+cask "notion"
 # Calculator and converter application
 cask "numi"
 # Web browser
@@ -81,8 +128,13 @@ cask "transmission"
 cask "visual-studio-code"
 # View output from scripts in the menu bar
 cask "xbar"
+# Video communication and virtual meeting platform
+cask "zoom"
 mas "Amphetamine", id: 937984704
 mas "Dato", id: 1470584107
+mas "iMovie", id: 408981434
 mas "Magnet", id: 441258766
 mas "Pixelmator Pro", id: 1289583905
+mas "Playgrounds", id: 1496833156
 mas "Shareful", id: 1522267256
+mas "Xcode", id: 497799835
